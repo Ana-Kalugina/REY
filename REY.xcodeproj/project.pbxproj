@@ -19,6 +19,7 @@
 		733568B98624DF5F69A45023 /* Clue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C97395E362EC21BCEEBFF /* Clue.swift */; };
 		798BE4ABA44DB4D6448D69E4 /* HUDNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20987804C00C6B5BFB1F24AC /* HUDNode.swift */; };
 		90458443507576E5E05AFB18 /* DailyMissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE6A2BB9347E327A873EB54 /* DailyMissionsView.swift */; };
+		CDE2A7F0168B4496617268DC /* TutorialNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2316B3241AB49A3A087DA5B /* TutorialNode.swift */; };
 		CE7E15E03B0A727D733636D9 /* CollectibleNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D810A60C4F1033AE0A497AB /* CollectibleNode.swift */; };
 		CEE38ADC32203B6F3455F335 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53BAC801BAACDEE45A935764 /* Assets.xcassets */; };
 		DA5AE0A5F65FDE95549A4E75 /* PlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C25E22DAD8A64A1FE3EB8D /* PlayerNode.swift */; };
@@ -47,6 +48,7 @@
 		9688B18F457885D3A87DDAFD /* REY.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = REY.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A30C2123A38AE6C166AB981E /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
 		AFB61216AEE77B69F45230CA /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
+		B2316B3241AB49A3A087DA5B /* TutorialNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialNode.swift; sourceTree = "<group>"; };
 		B9C7832697201D4EA3876B41 /* REYApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REYApp.swift; sourceTree = "<group>"; };
 		E0C9F9BE59634E91C880F649 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		FAE6A2BB9347E327A873EB54 /* DailyMissionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyMissionsView.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				0BB11F686E0B0149F77DE1D0 /* GameScene.swift */,
 				20987804C00C6B5BFB1F24AC /* HUDNode.swift */,
 				25C25E22DAD8A64A1FE3EB8D /* PlayerNode.swift */,
+				B2316B3241AB49A3A087DA5B /* TutorialNode.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -239,6 +242,7 @@
 				67AFE2F0C604397022AE70BE /* Mission.swift in Sources */,
 				DA5AE0A5F65FDE95549A4E75 /* PlayerNode.swift in Sources */,
 				DB8401AFF839C6946C132F28 /* REYApp.swift in Sources */,
+				CDE2A7F0168B4496617268DC /* TutorialNode.swift in Sources */,
 				3EE0E783A526EE5C038DEC0B /* UIColor+Hex.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
