@@ -11,131 +11,194 @@ class PlayerNode: SKNode {
         static let levelEnd:    UInt32 = 0x1 << 5
     }
 
-    private let moveSpeed: CGFloat = 230
-    private let jumpForce: CGFloat = 580
+    private let moveSpeed:  CGFloat = 300
+    private let jumpForce:  CGFloat = 580
     private var isGrounded  = false
     private var facingRight = true
     private var body: SKSpriteNode!
 
-    override init() {
+    let characterType: CharacterType
+
+    init(characterType: CharacterType = .male) {
+        self.characterType = characterType
         super.init()
         buildSprite()
         setupPhysics()
     }
 
-    required init?(coder aDecoder: NSCoder) { fatalError() }
+    required init?(coder: NSCoder) { fatalError() }
 
-    // MARK: - Sprite  (28 × 46 px, UIKit coords: y=0 is top of image)
+    // MARK: - Sprite (62 × 80 px) — horse + rider
 
     private func buildSprite() {
-        let sz = CGSize(width: 28, height: 46)
+        let sz = CGSize(width: 62, height: 80)
         let renderer = UIGraphicsImageRenderer(size: sz)
         let img = renderer.image { ctx in
             let c = ctx.cgContext
-
-            func fill(_ r: CGRect, _ hex: String, radius: CGFloat = 0) {
-                c.setFillColor(UIColor(hex: hex).cgColor)
-                if radius > 0 {
-                    c.addPath(UIBezierPath(roundedRect: r, cornerRadius: radius).cgPath)
-                    c.fillPath()
-                } else {
-                    c.fill(r)
-                }
-            }
-
-            // ── HAT (top of image = top of character) ──
-            fill(CGRect(x: 2,  y: 0,  width: 24, height: 5), "#8a5c18", radius: 2)  // brim
-            fill(CGRect(x: 6,  y: 1,  width: 16, height: 9), "#9a6c20", radius: 3)  // crown
-            fill(CGRect(x: 6,  y: 8,  width: 16, height: 2), "#d4a020")             // hat band
-            // Hat highlight
-            c.setFillColor(UIColor(hex: "#c0882a").withAlphaComponent(0.5).cgColor)
-            c.addPath(UIBezierPath(roundedRect: CGRect(x: 7, y: 2, width: 6, height: 6), cornerRadius: 2).cgPath)
-            c.fillPath()
-
-            // ── HAIR ──
-            fill(CGRect(x: 5, y: 8, width: 18, height: 7), "#5a2c0c", radius: 3)
-            fill(CGRect(x: 4, y: 12, width: 4, height: 6), "#5a2c0c", radius: 2)   // left strand
-            fill(CGRect(x: 20, y: 12, width: 4, height: 5), "#5a2c0c", radius: 2)  // right strand
-
-            // ── HEAD ──
-            fill(CGRect(x: 5, y: 12, width: 18, height: 14), "#d4906a", radius: 6)
-            // cheek flush
-            c.setFillColor(UIColor(hex: "#e8704a").withAlphaComponent(0.25).cgColor)
-            c.fillEllipse(in: CGRect(x: 6, y: 18, width: 5, height: 4))
-            c.fillEllipse(in: CGRect(x: 17, y: 18, width: 5, height: 4))
-
-            // ── EYES ──
-            // whites
-            c.setFillColor(UIColor.white.cgColor)
-            c.addPath(UIBezierPath(roundedRect: CGRect(x: 8, y: 16, width: 5, height: 5), cornerRadius: 2).cgPath)
-            c.fillPath()
-            c.addPath(UIBezierPath(roundedRect: CGRect(x: 15, y: 16, width: 5, height: 5), cornerRadius: 2).cgPath)
-            c.fillPath()
-            // irises (green)
-            c.setFillColor(UIColor(hex: "#3d7a20").cgColor)
-            c.fillEllipse(in: CGRect(x: 9, y: 17, width: 3, height: 3))
-            c.fillEllipse(in: CGRect(x: 16, y: 17, width: 3, height: 3))
-            // pupils
-            c.setFillColor(UIColor.black.cgColor)
-            c.fillEllipse(in: CGRect(x: 10, y: 18, width: 2, height: 2))
-            c.fillEllipse(in: CGRect(x: 17, y: 18, width: 2, height: 2))
-            // eye highlights
-            c.setFillColor(UIColor.white.cgColor)
-            c.fill(CGRect(x: 11, y: 17, width: 1, height: 1))
-            c.fill(CGRect(x: 18, y: 17, width: 1, height: 1))
-
-            // ── SCARF / NECK ──
-            fill(CGRect(x: 8,  y: 25, width: 12, height: 3), "#c8301a", radius: 1)
-            fill(CGRect(x: 10, y: 27, width: 4, height: 5), "#d4906a")  // neck
-
-            // ── JACKET (khaki explorer) ──
-            fill(CGRect(x: 3, y: 28, width: 22, height: 10), "#a07030", radius: 3)
-            // jacket shadow on sides
-            c.setFillColor(UIColor(hex: "#6a4010").withAlphaComponent(0.4).cgColor)
-            c.addPath(UIBezierPath(roundedRect: CGRect(x: 3, y: 28, width: 4, height: 10), cornerRadius: 2).cgPath)
-            c.fillPath()
-            c.addPath(UIBezierPath(roundedRect: CGRect(x: 21, y: 28, width: 4, height: 10), cornerRadius: 2).cgPath)
-            c.fillPath()
-            // jacket centre seam
-            c.setStrokeColor(UIColor(hex: "#6a4010").withAlphaComponent(0.5).cgColor)
-            c.setLineWidth(1)
-            c.move(to: CGPoint(x: 14, y: 29)); c.addLine(to: CGPoint(x: 14, y: 37)); c.strokePath()
-
-            // ── BELT ──
-            fill(CGRect(x: 3, y: 37, width: 22, height: 3), "#6a3010")
-            fill(CGRect(x: 11, y: 36, width: 6, height: 5), "#d4a020", radius: 1) // buckle
-
-            // ── PANTS ──
-            fill(CGRect(x: 4, y: 39, width: 9, height: 4), "#3a5028", radius: 2)
-            fill(CGRect(x: 15, y: 39, width: 9, height: 4), "#3a5028", radius: 2)
-
-            // ── BOOTS ──
-            fill(CGRect(x: 3,  y: 42, width: 10, height: 4), "#2a1808", radius: 2)
-            fill(CGRect(x: 15, y: 42, width: 10, height: 4), "#2a1808", radius: 2)
-            // boot highlight
-            c.setFillColor(UIColor(hex: "#4a2c10").withAlphaComponent(0.6).cgColor)
-            c.fillEllipse(in: CGRect(x: 4, y: 42, width: 4, height: 2))
-            c.fillEllipse(in: CGRect(x: 16, y: 42, width: 4, height: 2))
+            let isFemale = characterType == .female
+            drawHorse(c)
+            drawRider(c, isFemale: isFemale)
         }
-
         body = SKSpriteNode(texture: SKTexture(image: img), size: sz)
         body.anchorPoint = CGPoint(x: 0.5, y: 0)
         addChild(body)
     }
 
+    private func drawHorse(_ c: CGContext) {
+        func fill(_ r: CGRect, _ hex: String, radius: CGFloat = 0) {
+            c.setFillColor(UIColor(hex: hex).cgColor)
+            if radius > 0 { c.addPath(UIBezierPath(roundedRect: r, cornerRadius: radius).cgPath); c.fillPath() }
+            else { c.fill(r) }
+        }
+
+        // Body
+        fill(CGRect(x: 4, y: 40, width: 50, height: 22), "#7a3a10", radius: 8)
+        // Body highlight
+        c.setFillColor(UIColor(hex: "#9a5a28").withAlphaComponent(0.45).cgColor)
+        c.fillEllipse(in: CGRect(x: 18, y: 42, width: 20, height: 10))
+
+        // Neck
+        let neck = CGMutablePath()
+        neck.move(to:    CGPoint(x: 44, y: 42))
+        neck.addLine(to: CGPoint(x: 53, y: 26))
+        neck.addLine(to: CGPoint(x: 60, y: 28))
+        neck.addLine(to: CGPoint(x: 55, y: 44))
+        neck.closeSubpath()
+        c.setFillColor(UIColor(hex: "#7a3a10").cgColor)
+        c.addPath(neck); c.fillPath()
+
+        // Head
+        fill(CGRect(x: 50, y: 22, width: 12, height: 18), "#7a3a10", radius: 5)
+        // Nose/snout extension
+        fill(CGRect(x: 56, y: 28, width: 6, height: 10), "#7a3a10", radius: 3)
+        // Eye
+        c.setFillColor(UIColor.black.cgColor)
+        c.fillEllipse(in: CGRect(x: 58, y: 26, width: 4, height: 4))
+        c.setFillColor(UIColor.white.cgColor)
+        c.fill(CGRect(x: 61, y: 26, width: 1, height: 1))
+        // Nostril
+        c.setFillColor(UIColor(hex: "#4a1a08").cgColor)
+        c.fillEllipse(in: CGRect(x: 59, y: 34, width: 3, height: 2))
+
+        // Mane along neck
+        c.setFillColor(UIColor(hex: "#2a1008").cgColor)
+        for i in 0..<5 {
+            let mx = CGFloat(44 + i * 3)
+            let my = CGFloat(23 + i * 3)
+            c.fillEllipse(in: CGRect(x: mx, y: my, width: 9, height: 5))
+        }
+
+        // Tail
+        let tail = CGMutablePath()
+        tail.move(to:       CGPoint(x: 8,  y: 46))
+        tail.addCurve(to:   CGPoint(x: -2, y: 64),
+                     control1: CGPoint(x: -2, y: 48),
+                     control2: CGPoint(x: -8, y: 58))
+        c.setStrokeColor(UIColor(hex: "#2a1008").cgColor)
+        c.setLineWidth(4.5)
+        c.addPath(tail); c.strokePath()
+
+        // Legs — back pair (left)
+        fill(CGRect(x: 10, y: 58, width: 7, height: 20), "#5a2808")
+        fill(CGRect(x: 19, y: 58, width: 7, height: 20), "#5a2808")
+        // Legs — front pair (right)
+        fill(CGRect(x: 36, y: 58, width: 7, height: 20), "#5a2808")
+        fill(CGRect(x: 45, y: 58, width: 7, height: 20), "#5a2808")
+
+        // Hooves
+        for hx: CGFloat in [9, 18, 35, 44] {
+            fill(CGRect(x: hx, y: 74, width: 9, height: 6), "#1a0806", radius: 2)
+        }
+
+        // Saddle
+        fill(CGRect(x: 18, y: 35, width: 28, height: 11), "#6a1010", radius: 3)
+        c.setStrokeColor(UIColor(hex: "#f5c842").withAlphaComponent(0.7).cgColor)
+        c.setLineWidth(1)
+        c.addPath(UIBezierPath(roundedRect: CGRect(x: 18, y: 35, width: 28, height: 11), cornerRadius: 3).cgPath)
+        c.strokePath()
+    }
+
+    private func drawRider(_ c: CGContext, isFemale: Bool) {
+        func fill(_ r: CGRect, _ hex: String, radius: CGFloat = 0) {
+            c.setFillColor(UIColor(hex: hex).cgColor)
+            if radius > 0 { c.addPath(UIBezierPath(roundedRect: r, cornerRadius: radius).cgPath); c.fillPath() }
+            else { c.fill(r) }
+        }
+
+        let jacketHex  = isFemale ? "#2a6a5a" : "#a07030"
+        let shadowHex  = isFemale ? "#1a4a3a" : "#6a4010"
+        let hairHex    = isFemale ? "#3a1808" : "#2a1008"
+        let hatHex     = isFemale ? "#6a4020" : "#7a4a10"
+
+        // Pants gripping saddle
+        fill(CGRect(x: 18, y: 28, width: 10, height: 14), "#3a5028", radius: 2)
+        fill(CGRect(x: 34, y: 28, width: 10, height: 14), "#3a5028", radius: 2)
+
+        // Jacket torso
+        fill(CGRect(x: 17, y: 12, width: 28, height: 20), jacketHex, radius: 3)
+        // Shadow sides
+        fill(CGRect(x: 17, y: 12, width: 5, height: 20), shadowHex, radius: 2)
+        fill(CGRect(x: 40, y: 12, width: 5, height: 20), shadowHex, radius: 2)
+        // Jacket seam
+        c.setStrokeColor(UIColor(hex: shadowHex).withAlphaComponent(0.5).cgColor)
+        c.setLineWidth(1)
+        c.move(to: CGPoint(x: 31, y: 13)); c.addLine(to: CGPoint(x: 31, y: 31)); c.strokePath()
+
+        // Hair
+        fill(CGRect(x: 23, y: 6, width: 16, height: 10), hairHex, radius: 3)
+        if isFemale {
+            fill(CGRect(x: 17, y: 8, width: 7, height: 14), hairHex, radius: 3) // flowing hair
+        }
+
+        // Head skin
+        fill(CGRect(x: 22, y: 6, width: 18, height: 14), "#d4906a", radius: 6)
+        // Cheeks
+        c.setFillColor(UIColor(hex: "#e8704a").withAlphaComponent(0.2).cgColor)
+        c.fillEllipse(in: CGRect(x: 22, y: 12, width: 5, height: 4))
+        c.fillEllipse(in: CGRect(x: 35, y: 12, width: 5, height: 4))
+
+        // Eyes
+        c.setFillColor(UIColor.white.cgColor)
+        c.addPath(UIBezierPath(roundedRect: CGRect(x: 25, y: 9, width: 5, height: 5), cornerRadius: 2).cgPath); c.fillPath()
+        c.addPath(UIBezierPath(roundedRect: CGRect(x: 32, y: 9, width: 5, height: 5), cornerRadius: 2).cgPath); c.fillPath()
+        let irisHex = isFemale ? "#3d5aa0" : "#3d7a20"
+        c.setFillColor(UIColor(hex: irisHex).cgColor)
+        c.fillEllipse(in: CGRect(x: 26, y: 10, width: 3, height: 3))
+        c.fillEllipse(in: CGRect(x: 33, y: 10, width: 3, height: 3))
+        c.setFillColor(UIColor.black.cgColor)
+        c.fillEllipse(in: CGRect(x: 27, y: 11, width: 2, height: 2))
+        c.fillEllipse(in: CGRect(x: 34, y: 11, width: 2, height: 2))
+        // Eye highlights
+        c.setFillColor(UIColor.white.cgColor)
+        c.fill(CGRect(x: 28, y: 10, width: 1, height: 1))
+        c.fill(CGRect(x: 35, y: 10, width: 1, height: 1))
+
+        // Hat brim
+        fill(CGRect(x: 17, y: 3, width: 28, height: 4), hatHex, radius: 2)
+        // Hat crown
+        fill(CGRect(x: 20, y: 0, width: 22, height: 8), hatHex, radius: 3)
+        // Hat band (gold for both)
+        fill(CGRect(x: 20, y: 4, width: 22, height: 2), "#f5c842")
+        if isFemale {
+            // Flower accent
+            c.setFillColor(UIColor(hex: "#e84070").cgColor)
+            c.fillEllipse(in: CGRect(x: 36, y: 1, width: 5, height: 5))
+        }
+    }
+
     private func setupPhysics() {
         let physBody = SKPhysicsBody(
-            rectangleOf: CGSize(width: 20, height: 44),
-            center: CGPoint(x: 0, y: 22)
+            rectangleOf: CGSize(width: 22, height: 70),
+            center: CGPoint(x: 0, y: 35)
         )
-        physBody.mass             = 1.0
-        physBody.allowsRotation   = false
-        physBody.restitution      = 0
-        physBody.friction         = 0.0
-        physBody.linearDamping    = 0
-        physBody.categoryBitMask  = Cat.player
+        physBody.mass            = 1.2
+        physBody.allowsRotation  = false
+        physBody.restitution     = 0
+        physBody.friction        = 0.0
+        physBody.linearDamping   = 0
+        physBody.categoryBitMask = Cat.player
         physBody.contactTestBitMask = Cat.collectible | Cat.enemy | Cat.clue | Cat.levelEnd
-        physBody.collisionBitMask = Cat.ground
+        physBody.collisionBitMask   = Cat.ground
         self.physicsBody = physBody
     }
 
@@ -160,18 +223,21 @@ class PlayerNode: SKNode {
         physicsBody?.velocity.dy = jumpForce
         isGrounded = false
 
-        let squash  = SKAction.scaleX(to: 1.2, y: 0.8, duration: 0.07)
-        let stretch = SKAction.scaleX(to: 0.85, y: 1.15, duration: 0.09)
-        let restore = SKAction.scaleX(to: 1.0, y: 1.0, duration: 0.1)
-        body.run(SKAction.sequence([squash, stretch, restore]))
+        // Horse jump squash/stretch
+        let leap = SKAction.sequence([
+            SKAction.scaleX(to: 1.1, y: 0.88, duration: 0.06),
+            SKAction.scaleX(to: 0.9, y: 1.12, duration: 0.09),
+            SKAction.scaleX(to: 1.0, y: 1.0,  duration: 0.1),
+        ])
+        body.run(leap)
     }
 
     func setGrounded(_ grounded: Bool) {
         isGrounded = grounded
         if grounded {
             let land = SKAction.sequence([
-                SKAction.scaleX(to: 1.15, y: 0.85, duration: 0.05),
-                SKAction.scaleX(to: 1.0,  y: 1.0,  duration: 0.09),
+                SKAction.scaleX(to: 1.12, y: 0.88, duration: 0.05),
+                SKAction.scaleX(to: 1.0,  y: 1.0,  duration: 0.08),
             ])
             body.run(land)
         }
@@ -184,7 +250,7 @@ class PlayerNode: SKNode {
         ])
         body.run(flash)
         physicsBody?.applyImpulse(
-            CGVector(dx: facingRight ? -140 : 140, dy: 280)
+            CGVector(dx: facingRight ? -180 : 180, dy: 320)
         )
     }
 }

@@ -2,6 +2,7 @@ import SwiftUI
 import Combine
 
 class GameState: ObservableObject {
+    @Published var selectedCharacter: CharacterType = .male
     @Published var score: Int = 0
     @Published var totalGold: Int = 0
     @Published var artifactsCollected: Int = 0

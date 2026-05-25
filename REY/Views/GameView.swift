@@ -50,7 +50,7 @@ struct GameView: View {
         }
         .onAppear {
             gameState.resetLevelStats()
-            let s = GameScene(size: UIScreen.main.bounds.size)
+            let s = GameScene(size: UIScreen.main.bounds.size, characterType: gameState.selectedCharacter)
             s.scaleMode = .aspectFill
             s.onGoldCollected = { [weak gameState] amount in
                 DispatchQueue.main.async { gameState?.addGold(amount) }

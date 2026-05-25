@@ -19,12 +19,14 @@
 		733568B98624DF5F69A45023 /* Clue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 125C97395E362EC21BCEEBFF /* Clue.swift */; };
 		798BE4ABA44DB4D6448D69E4 /* HUDNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20987804C00C6B5BFB1F24AC /* HUDNode.swift */; };
 		90458443507576E5E05AFB18 /* DailyMissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE6A2BB9347E327A873EB54 /* DailyMissionsView.swift */; };
+		AE1F1231A958589E0F36432B /* CharacterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B280F65A288E1206FEBA9911 /* CharacterType.swift */; };
 		CDE2A7F0168B4496617268DC /* TutorialNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2316B3241AB49A3A087DA5B /* TutorialNode.swift */; };
 		CE7E15E03B0A727D733636D9 /* CollectibleNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D810A60C4F1033AE0A497AB /* CollectibleNode.swift */; };
 		CEE38ADC32203B6F3455F335 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53BAC801BAACDEE45A935764 /* Assets.xcassets */; };
 		DA5AE0A5F65FDE95549A4E75 /* PlayerNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C25E22DAD8A64A1FE3EB8D /* PlayerNode.swift */; };
 		DB8401AFF839C6946C132F28 /* REYApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C7832697201D4EA3876B41 /* REYApp.swift */; };
 		E67A2FDC1A44CA9B54084353 /* JournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F615495DEE5D39759AB3117 /* JournalView.swift */; };
+		F2704D91C72D24EB89B38DA0 /* CharacterSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8C0096329BCFF2C7D44C0E1 /* CharacterSelectView.swift */; };
 		F3BD720FEDA8CA307D596B2F /* ClueNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0477AD4D59199FBCE4F92A /* ClueNode.swift */; };
 		F5E837AC8203D092D094AAAD /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB11F686E0B0149F77DE1D0 /* GameScene.swift */; };
 /* End PBXBuildFile section */
@@ -49,8 +51,10 @@
 		A30C2123A38AE6C166AB981E /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
 		AFB61216AEE77B69F45230CA /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		B2316B3241AB49A3A087DA5B /* TutorialNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialNode.swift; sourceTree = "<group>"; };
+		B280F65A288E1206FEBA9911 /* CharacterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterType.swift; sourceTree = "<group>"; };
 		B9C7832697201D4EA3876B41 /* REYApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = REYApp.swift; sourceTree = "<group>"; };
 		E0C9F9BE59634E91C880F649 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		F8C0096329BCFF2C7D44C0E1 /* CharacterSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectView.swift; sourceTree = "<group>"; };
 		FAE6A2BB9347E327A873EB54 /* DailyMissionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyMissionsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,6 +114,7 @@
 		BAAE6A675A106D9136D83478 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B280F65A288E1206FEBA9911 /* CharacterType.swift */,
 				125C97395E362EC21BCEEBFF /* Clue.swift */,
 				22BA6B07E22C98A9074CF371 /* GameState.swift */,
 				8CA9B2269A4BD090E1BD7052 /* Mission.swift */,
@@ -151,6 +156,7 @@
 		F3BC2624645F7027854B26FE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F8C0096329BCFF2C7D44C0E1 /* CharacterSelectView.swift */,
 				FAE6A2BB9347E327A873EB54 /* DailyMissionsView.swift */,
 				E0C9F9BE59634E91C880F649 /* GameView.swift */,
 				2F615495DEE5D39759AB3117 /* JournalView.swift */,
@@ -227,6 +233,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2704D91C72D24EB89B38DA0 /* CharacterSelectView.swift in Sources */,
+				AE1F1231A958589E0F36432B /* CharacterType.swift in Sources */,
 				733568B98624DF5F69A45023 /* Clue.swift in Sources */,
 				F3BD720FEDA8CA307D596B2F /* ClueNode.swift in Sources */,
 				CE7E15E03B0A727D733636D9 /* CollectibleNode.swift in Sources */,

@@ -2,7 +2,7 @@ import SwiftUI
 
 struct MainMenuView: View {
     @EnvironmentObject var gameState: GameState
-    @State private var showGame = false
+    @State private var showCharacterSelect = false
     @State private var showMissions = false
     @State private var showJournal = false
     @State private var titleGlow = false
@@ -88,7 +88,7 @@ struct MainMenuView: View {
                     Spacer()
 
                     MenuButton(title: "▶  PLAY", color: Color(hex: "#f5c842")) {
-                        showGame = true
+                        showCharacterSelect = true
                     }
                     MenuButton(title: "📅  MISSIONS", color: Color(hex: "#5bc0de")) {
                         showMissions = true
@@ -103,8 +103,8 @@ struct MainMenuView: View {
                 .frame(maxWidth: 280)
             }
         }
-        .fullScreenCover(isPresented: $showGame) {
-            GameView().environmentObject(gameState)
+        .fullScreenCover(isPresented: $showCharacterSelect) {
+            CharacterSelectView().environmentObject(gameState)
         }
         .sheet(isPresented: $showMissions) {
             DailyMissionsView().environmentObject(gameState)
