@@ -263,7 +263,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ]
         for pos in coinArcs {
             let coin = CollectibleNode(type: .gold)
-            coin.position = pos
+            coin.position = CGPoint(x: pos.x, y: pos.y)
             coin.zPosition = 3
             addChild(coin)
         }

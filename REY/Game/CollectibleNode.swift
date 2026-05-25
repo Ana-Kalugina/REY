@@ -83,7 +83,6 @@ class CollectibleNode: SKNode {
         sprite.run(SKAction.repeatForever(SKAction.sequence([up, down])))
 
         if collectibleType == .gold {
-            let spin = SKAction.rotate(byAngle: .pi * 2, duration: 2.5)
             // Coin shimmer via alpha pulse
             let pulse = SKAction.sequence([
                 SKAction.fadeAlpha(to: 0.7, duration: 0.4),
