@@ -12,7 +12,7 @@ struct DailyMissionsView: View {
                 // Header
                 HStack {
                     VStack(alignment: .leading, spacing: 2) {
-                        Text("МИССИИ ДНЯ")
+                        Text("DAILY MISSIONS")
                             .font(.system(size: 22, weight: .black, design: .monospaced))
                             .foregroundColor(Color(hex: "#f5c842"))
                         Text(Date(), style: .date)
@@ -47,7 +47,7 @@ struct DailyMissionsView: View {
                         HStack {
                             Image(systemName: "info.circle")
                                 .foregroundColor(Color(hex: "#5bc0de"))
-                            Text("Выполни все миссии — получи бонус +150 монет")
+                            Text("Complete all missions — earn +150 bonus gold")
                                 .font(.system(size: 12, design: .monospaced))
                                 .foregroundColor(Color(hex: "#5bc0de").opacity(0.8))
                         }

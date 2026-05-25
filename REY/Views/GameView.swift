@@ -77,14 +77,14 @@ struct PauseOverlay: View {
         ZStack {
             Color.black.opacity(0.65).ignoresSafeArea()
             VStack(spacing: 20) {
-                Text("⏸ ПАУЗА")
+                Text("⏸ PAUSED")
                     .font(.system(size: 26, weight: .black, design: .monospaced))
                     .foregroundColor(Color(hex: "#f5c842"))
 
                 Button {
                     onResume()
                 } label: {
-                    Text("▶  ПРОДОЛЖИТЬ")
+                    Text("▶  RESUME")
                         .font(.system(size: 16, weight: .bold, design: .monospaced))
                         .foregroundColor(Color(hex: "#0d1b2a"))
                         .frame(width: 220)
@@ -96,7 +96,7 @@ struct PauseOverlay: View {
                 Button {
                     onQuit()
                 } label: {
-                    Text("← ВЫЙТИ")
+                    Text("← QUIT")
                         .font(.system(size: 14, weight: .medium, design: .monospaced))
                         .foregroundColor(.white.opacity(0.6))
                 }

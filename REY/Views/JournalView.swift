@@ -13,10 +13,10 @@ struct JournalView: View {
                 // Header
                 HStack {
                     VStack(alignment: .leading, spacing: 2) {
-                        Text("ДНЕВНИК РЕЙ")
+                        Text("REY'S JOURNAL")
                             .font(.system(size: 22, weight: .black, design: .monospaced))
                             .foregroundColor(Color(hex: "#9b59b6"))
-                        Text("\(gameState.collectedClues.count) из \(Clue.allClues.count) улик найдено")
+                        Text("\(gameState.collectedClues.count) of \(Clue.allClues.count) clues found")
                             .font(.system(size: 11, design: .monospaced))
                             .foregroundColor(.white.opacity(0.45))
                     }
@@ -90,7 +90,7 @@ struct ClueCard: View {
                 .multilineTextAlignment(.center)
                 .lineLimit(2)
 
-            Text("Уровень \(clue.levelFound)")
+            Text("Level \(clue.levelFound)")
                 .font(.system(size: 10, design: .monospaced))
                 .foregroundColor(found ? Color(hex: "#9b59b6") : .white.opacity(0.2))
         }
@@ -136,7 +136,7 @@ struct ClueDetailOverlay: View {
                 HStack {
                     Image(systemName: "map.fill")
                         .foregroundColor(Color(hex: "#9b59b6"))
-                    Text("Найдено на уровне \(clue.levelFound)")
+                    Text("Found in level \(clue.levelFound)")
                         .font(.system(size: 12, design: .monospaced))
                         .foregroundColor(Color(hex: "#9b59b6"))
                 }
@@ -145,7 +145,7 @@ struct ClueDetailOverlay: View {
                 .background(Color(hex: "#9b59b6").opacity(0.12))
                 .clipShape(Capsule())
 
-                Button("Закрыть") { onDismiss() }
+                Button("Close") { onDismiss() }
                     .font(.system(size: 13, weight: .bold, design: .monospaced))
                     .foregroundColor(.white.opacity(0.7))
             }

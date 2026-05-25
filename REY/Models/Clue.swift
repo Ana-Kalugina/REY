@@ -10,36 +10,36 @@ struct Clue: Identifiable, Codable, Equatable {
     static let allClues: [Clue] = [
         Clue(
             id: "stone_map",
-            title: "Каменная карта",
-            description: "Фрагмент карты, вырезанный в скале. На ней изображены три горы и извилистая река, ведущая к солнцу.",
+            title: "Stone Map",
+            description: "A map fragment carved into rock. It shows three mountains and a winding river leading toward the sun.",
             symbol: "🗺️",
             levelFound: 1
         ),
         Clue(
             id: "golden_mask",
-            title: "Золотая маска",
-            description: "Маска жреца солнца. Надпись на обороте: «Иди туда, куда падает первый луч рассвета».",
+            title: "Golden Mask",
+            description: "A sun priest's mask. The inscription on the back reads: 'Follow where the first ray of dawn falls'.",
             symbol: "🎭",
             levelFound: 1
         ),
         Clue(
             id: "ancient_coin",
-            title: "Монета Эль-Рея",
-            description: "Монета с профилем короля в перьевой короне. На обороте — звезда с восемью лучами.",
+            title: "El Rey Coin",
+            description: "A coin bearing the king's profile wearing a feathered crown. The reverse shows an eight-pointed star.",
             symbol: "🪙",
             levelFound: 2
         ),
         Clue(
             id: "jungle_totem",
-            title: "Тотем джунглей",
-            description: "Деревянный тотем с символами птиц. Стрела в основании указывает строго на запад.",
+            title: "Jungle Totem",
+            description: "A wooden totem carved with bird symbols. The arrow at its base points due west.",
             symbol: "🗿",
             levelFound: 2
         ),
         Clue(
             id: "temple_inscription",
-            title: "Надпись на храме",
-            description: "Древние письмена на воротах: «Золотой город откроется тому, кто докажет своё достоинство».",
+            title: "Temple Inscription",
+            description: "Ancient writing on the gate: 'The golden city shall reveal itself to those who prove their worth'.",
             symbol: "📜",
             levelFound: 3
         ),

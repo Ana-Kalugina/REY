@@ -5,7 +5,7 @@ class EnemyNode: SKNode {
     private let patrolDistance: CGFloat
     private var startX: CGFloat = 0
     private var movingRight = true
-    private let speed: CGFloat = 70
+    private let patrolSpeed: CGFloat = 70
     private var spriteNode: SKSpriteNode!
 
     init(patrolDistance: CGFloat) {
@@ -16,10 +16,6 @@ class EnemyNode: SKNode {
     }
 
     required init?(coder: NSCoder) { fatalError() }
-
-    override func didMove(to scene: SKScene) {
-        startX = position.x
-    }
 
     private func buildSprite() {
         let size = CGSize(width: 26, height: 24)
@@ -76,7 +72,7 @@ class EnemyNode: SKNode {
             spriteNode.xScale = 1
         }
 
-        let dx = movingRight ? speed * (1/60.0) : -speed * (1/60.0)
+        let dx = movingRight ? patrolSpeed * (1/60.0) : -patrolSpeed * (1/60.0)
         position.x += dx
     }
 }

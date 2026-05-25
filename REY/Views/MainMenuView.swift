@@ -87,13 +87,13 @@ struct MainMenuView: View {
                 VStack(spacing: 16) {
                     Spacer()
 
-                    MenuButton(title: "▶  ИГРАТЬ", color: Color(hex: "#f5c842")) {
+                    MenuButton(title: "▶  PLAY", color: Color(hex: "#f5c842")) {
                         showGame = true
                     }
-                    MenuButton(title: "📅  МИССИИ", color: Color(hex: "#5bc0de")) {
+                    MenuButton(title: "📅  MISSIONS", color: Color(hex: "#5bc0de")) {
                         showMissions = true
                     }
-                    MenuButton(title: "🔍  ДНЕВНИК", color: Color(hex: "#9b59b6")) {
+                    MenuButton(title: "🔍  JOURNAL", color: Color(hex: "#9b59b6")) {
                         showJournal = true
                     }
 

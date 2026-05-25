@@ -47,13 +47,13 @@ class GameState: ObservableObject {
     func generateDailyMissions() {
         let seed = (Calendar.current.ordinality(of: .day, in: .year, for: Date()) ?? 1)
         let pool: [Mission] = [
-            Mission(id: "gold_5",      title: "Золотой охотник", description: "Собери 5 монет",           icon: "💰", target: 5,  type: .collectGold),
-            Mission(id: "gold_10",     title: "Сокровища Рея",   description: "Собери 10 монет",          icon: "💎", target: 10, type: .collectGold),
-            Mission(id: "clue_1",      title: "Детектив Рей",    description: "Найди 1 улику",            icon: "🔍", target: 1,  type: .findClue),
-            Mission(id: "clue_2",      title: "Следопыт",        description: "Найди 2 улики",            icon: "🧩", target: 2,  type: .findClue),
-            Mission(id: "artifact_1",  title: "Исследователь",   description: "Собери 1 артефакт",        icon: "🏺", target: 1,  type: .collectArtifact),
-            Mission(id: "no_damage",   title: "Неуязвимый",      description: "Пройди без урона",          icon: "🛡️", target: 1,  type: .surviveLevel),
-            Mission(id: "speed_60",    title: "Молния",          description: "Пройди уровень за 60 сек", icon: "⚡", target: 60, type: .speedRun),
+            Mission(id: "gold_5",     title: "Gold Hunter",    description: "Collect 5 coins",          icon: "💰", target: 5,  type: .collectGold),
+            Mission(id: "gold_10",    title: "Rey's Treasure", description: "Collect 10 coins",         icon: "💎", target: 10, type: .collectGold),
+            Mission(id: "clue_1",     title: "Detective Rey",  description: "Find 1 clue",              icon: "🔍", target: 1,  type: .findClue),
+            Mission(id: "clue_2",     title: "Tracker",        description: "Find 2 clues",             icon: "🧩", target: 2,  type: .findClue),
+            Mission(id: "artifact_1", title: "Explorer",       description: "Collect 1 artifact",       icon: "🏺", target: 1,  type: .collectArtifact),
+            Mission(id: "no_damage",  title: "Untouchable",    description: "Complete level unharmed",  icon: "🛡️", target: 1,  type: .surviveLevel),
+            Mission(id: "speed_60",   title: "Lightning",      description: "Finish level in 60 sec",   icon: "⚡", target: 60, type: .speedRun),
         ]
         let i0 = seed % pool.count
         let i1 = (seed + 2) % pool.count

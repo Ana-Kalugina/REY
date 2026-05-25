@@ -503,7 +503,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             hud.showFloatingText("+10", at: node.position)
         case .artifact:
             onArtifactCollected?()
-            hud.showFloatingText("🏺 АРТЕФАКТ!", at: node.position, color: UIColor(hex: "#c0822e"))
+            hud.showFloatingText("🏺 ARTIFACT!", at: node.position, color: UIColor(hex: "#c0822e"))
         }
     }
 
@@ -572,7 +572,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         desc.position = CGPoint(x: 0, y: -10)
         panel.addChild(desc)
 
-        let hint = SKLabelNode(text: "📓 Добавлено в дневник")
+        let hint = SKLabelNode(text: "📓 Added to journal")
         hint.fontName = "Courier"
         hint.fontSize = 9
         hint.fontColor = UIColor(hex: "#9b59b6")
@@ -612,7 +612,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             SKAction.scale(to: 1.0, duration: 0.15),
         ]))
 
-        let title = SKLabelNode(text: "УРОВЕНЬ ПРОЙДЕН!")
+        let title = SKLabelNode(text: "LEVEL COMPLETE!")
         title.fontName = "Courier-Bold"
         title.fontSize = 26
         title.fontColor = UIColor(hex: "#f5c842")
@@ -621,7 +621,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         title.zPosition = 91
         cam.addChild(title)
 
-        let sub = SKLabelNode(text: !tookDamage ? "🛡️ БЕЗ УРОНА!" : "Продолжай исследование!")
+        let sub = SKLabelNode(text: !tookDamage ? "🛡️ NO DAMAGE!" : "Keep exploring!")
         sub.fontName = "Courier"
         sub.fontSize = 14
         sub.fontColor = UIColor.white.withAlphaComponent(0.75)
