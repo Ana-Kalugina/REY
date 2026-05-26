@@ -20,7 +20,7 @@ class ControlsNode: SKNode {
     required init?(coder: NSCoder) { fatalError() }
 
     private func buildControls() {
-        let bottomY = -viewSize.height / 2 + 56
+        let bottomY = -viewSize.height / 2 + 44
         let leftX   = -viewSize.width  / 2 + 52
 
         leftBtn  = ControlButton(label: "◀", size: CGSize(width: 58, height: 58))

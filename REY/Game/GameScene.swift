@@ -82,7 +82,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     // MARK: - Control regions (in camera-local space)
     private func setupControlRegions() {
-        let bottomY = -size.height / 2 + 56
+        let bottomY = -size.height / 2 + 44
         let lx      = -size.width  / 2 + 52
         let pad: CGFloat = 18
         leftBtnRegion  = CGRect(x: lx      - 29 - pad, y: bottomY - 29 - pad, width: 58 + pad*2, height: 58 + pad*2)
@@ -325,7 +325,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for start in [18, 35, 55, 68] {
             for i in start..<(start + 3) { if i < cols { heights[i] = 0 } }
         }
-        for i in stride(from: 0, to: cols, by: 7) {
+        // Height-5 bumps start only after column 14 (gives player a safe flat run-up)
+        for i in stride(from: 14, to: cols, by: 7) {
             if heights[i] > 0 { heights[i] = 5 }
         }
 
@@ -338,10 +339,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
 
+        // Platform heights (py) lowered so they're reachable with the jump arc
         let platforms: [(Int, Int, Int)] = [
-            (6, 7, 4), (14, 9, 3), (21, 7, 5), (29, 10, 4),
-            (37, 8, 4), (44, 11, 5), (51, 9, 4), (59, 8, 3),
-            (64, 12, 4), (70, 9, 3), (74, 7, 4),
+            (6, 5, 4), (14, 6, 3), (21, 5, 5), (29, 7, 4),
+            (37, 6, 4), (44, 8, 5), (51, 6, 4), (59, 5, 3),
+            (64, 9, 4), (70, 6, 3), (74, 5, 4),
         ]
         for (px, py, pw) in platforms {
             for i in 0..<pw {

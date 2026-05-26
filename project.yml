@@ -2,14 +2,14 @@ name: REY
 options:
   bundleIdPrefix: com.anakalugina
   deploymentTarget:
-    iOS: "17.0"
+    iOS: "16.0"
   xcodeVersion: "16.2"
   createIntermediateGroups: true
 
 settings:
   base:
     SWIFT_VERSION: "5.10"
-    IPHONEOS_DEPLOYMENT_TARGET: "17.0"
+    IPHONEOS_DEPLOYMENT_TARGET: "16.0"
 
 targets:
   REY:
